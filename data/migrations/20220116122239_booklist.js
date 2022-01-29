@@ -14,11 +14,13 @@ exports.up = function (knex) {
       //publisher
       table.increments();
       table.string("name", 50)
+      table.text("image_url")
 
     }).createTable('author', (table) => {
       //author
       table.increments('id');
       table.string('name', 100)
+      table.text("image_url")
     })
     .createTable('book', (table) => {
       //book
@@ -28,6 +30,7 @@ exports.up = function (knex) {
       table.foreign('author_id').references('author.id')
       table.integer('publisher_id').unsigned();
       table.foreign('publisher_id').references('publisher.id')
+      table.text("image_url")
       table.string('page_count', 4).notNullable();
       table.boolean('status').defaultTo(true);
 
