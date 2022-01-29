@@ -2,11 +2,15 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 8080
 const bodyParser = require('body-parser')
+const cors = require("cors");
+const helmet = require("helmet")
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({
     extended: true
 })) // for parsing application/x-www-form-urlencoded
+server.use(cors());
+server.use(helmet());
 const appErrorHandler = require('./middleware/errorHandler');
 let bookRoute = require('./routes/bookRouter')
 let publisherRoute = require('./routes/publisherRouter')
