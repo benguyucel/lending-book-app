@@ -9,8 +9,8 @@ app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({
     extended: true
 })) // for parsing application/x-www-form-urlencoded
-server.use(cors());
-server.use(helmet());
+app.use(cors());
+app.use(helmet());
 const appErrorHandler = require('./middleware/errorHandler');
 let bookRoute = require('./routes/bookRouter')
 let publisherRoute = require('./routes/publisherRouter')
