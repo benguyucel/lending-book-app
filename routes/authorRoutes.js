@@ -49,7 +49,7 @@ router.post('/', body('name').notEmpty().withMessage(`Author ${messages.required
     }
 
 })
-router.put('/:id', body('name').notEmpty().withMessage(messages.requiredAuthor), body('name').isLength({min: 3}).withMessage(messages.minAuthor + " 3"), (req, res) => {
+router.put('/:id', body('name').notEmpty().withMessage(`Author ${messages.required}`), body('name').isLength({min: 3}).withMessage(`Author ${messages.min} 3`), (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         next([
