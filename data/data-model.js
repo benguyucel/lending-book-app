@@ -101,7 +101,7 @@ async function getPersonById(id) {
             'p.sur_name as surName',
             'b.id as bookId',
             'b.name as bookName',
-            'b.image_url as image_url',
+            'b.image_url',
             'l.updated_at',
             'l.deliver__date'
         )
@@ -140,7 +140,7 @@ async function getBook() {
         .select(
             'b.id as bookId',
             'b.name as book',
-        'b.image_url as image_url',
+        'b.image_url',
             'a.name as author',
             'p.name as publisher',
             'page_count',
@@ -157,7 +157,7 @@ async function getBookById(id) {
             'b.name as book',
             'a.name as author',
             'p.name as publisher',
-            'b.image_url as image_url',
+            'b.image_url',
             'page_count',
             'status'
         )
@@ -209,7 +209,7 @@ async function getLending() {
         .select(
             'l.id',
             'b.id as bookId',
-        'b.image_url as image_url',
+        'b.image_url',
             'b.name as bookName',
             'p.name as personName',
             'p.sur_name as surName',
@@ -242,7 +242,7 @@ async function getLendingById(id){
        'l.id',
        'b.name as bookName',
        'p.name as personName',
-       'b.image_url as image_url',
+       'b.image_url',
        'p.sur_name as surName',
        'pu.name as publisherName',
        'l.created_at as created_at'
