@@ -28,7 +28,7 @@ router.get("/:id", async(req, res, next) => {
     }
 })
 
-router.post('/', body('name').notEmpty().withMessage(messages.requiredAuthor), body('name').isLength({min: 3}).withMessage(messages.minAuthor + " 3"), async(req, res, next) => {
+router.post('/', body('name').notEmpty().withMessage(`Author ${messages.required}`), body('name').isLength({min: 3}).withMessage(`Author name ${messages.min} 3`), async(req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         next([
