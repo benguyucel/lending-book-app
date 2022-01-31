@@ -29,10 +29,10 @@ module.exports = {
 }
 
 async function getAutor() {
-    return await db('author')
+    return await db('author').where('status',true)
 }
 async function getAuthorById(id) {
-    const author = await db("author").where('id', id).first();
+    const author = await db("author").where('id', id).where("status",true).first();
     if (author) {
         return author;
     } else {
@@ -43,7 +43,6 @@ async function getAuthorById(id) {
 
 async function addAutor(newAuthor) {
     const [id] = await db('author').insert(newAuthor, "id")
-    console.log(id)
     return db('author').where(
         id
     ).first();
@@ -55,7 +54,7 @@ async function updateAuthor(updatedData, id) {
 }
 
 async function deleteAutor(id) {
-    await db('author').where('id', id).del();
+    await db('author').where('id', id).update({'status':false});
 }
 
 

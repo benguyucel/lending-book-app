@@ -15,12 +15,14 @@ exports.up = function (knex) {
       table.increments();
       table.string("name", 50)
       table.text("image_url").defaultTo(null)
+      table.boolean('status').defaultTo(true);
 
     }).createTable('author', (table) => {
       //author
       table.increments('id');
       table.string('name', 100)
       table.text("image_url").defaultTo(null)
+      table.boolean('status').defaultTo(true);
     })
     .createTable('book', (table) => {
       //book
@@ -46,7 +48,7 @@ exports.up = function (knex) {
       }).defaultTo(knex.fn.now(6));
       table.timestamp('updated_at').defaultTo(knex.fn.now());
       table.timestamp('deliver__date').defaultTo(null);
-
+      
     })
 };
 
