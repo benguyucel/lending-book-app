@@ -9,13 +9,21 @@ app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({
     extended: true
 })) // for parsing application/x-www-form-urlencoded
-app.use(cors(
-    {
-        origin:"http://localhost:3000",
-        credentials:true,
-        
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
     }
-));
+    else {
+      next();
+    }
+};
+app.use(allowCrossDomain)
+app.use(cors());
 app.use(helmet());
 const appErrorHandler = require('./middleware/errorHandler');
 let bookRoute = require('./routes/bookRouter')
