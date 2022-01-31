@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({
 })) // for parsing application/x-www-form-urlencoded
 app.use(cors(
     {
-        origin:"*"
+        origin:"*",
+        credentials:true
     }
 ));
 app.use(helmet());
