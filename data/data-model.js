@@ -49,7 +49,8 @@ async function addAutor(newAuthor) {
 }
 
 async function updateAuthor(updatedData, id) {
-    await db('author').where('id', id).update(updatedData)
+
+    await db('author').where({id:id}).update(updatedData)
     return db('author').where('id', id).first();
 }
 

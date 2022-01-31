@@ -4,6 +4,11 @@ const port = process.env.PORT || 8080
 const bodyParser = require('body-parser')
 const cors = require("cors");
 const helmet = require("helmet")
+
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({
+    extended: true
+})) // for parsing application/x-www-form-urlencoded
 const whitelist = ["http://localhost:3000"]
 const corsOptions = {
   origin: function (origin, callback) {
@@ -17,11 +22,6 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 app.use(helmet());
-app.use(bodyParser.json()) // for parsing application/json
-app.use(bodyParser.urlencoded({
-    extended: true
-})) // for parsing application/x-www-form-urlencoded
-
 const appErrorHandler = require('./middleware/errorHandler');
 let bookRoute = require('./routes/bookRouter')
 let publisherRoute = require('./routes/publisherRouter')

@@ -49,14 +49,15 @@ router.post('/', body('name').notEmpty().withMessage(`Author ${messages.required
     }
 
 })
-router.put('/:id', body('name').notEmpty().withMessage(`Author ${messages.required}`), body('name').isLength({min: 3}).withMessage(`Author ${messages.min} 3`), (req, res) => {
+router.put('/:id', body('name').notEmpty().withMessage(`Author ${messages.required}`), body('name').isLength({min: 3}).withMessage(`Author ${messages.min} 3`), (req, res,next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         next([
             400, messages.array()
         ])
     }
-    let {id} = parseInt(req.params);
+    let {id} =req.params;
+
     updatedData = req.body;
     Author
         .updateAuthor(updatedData, id)
