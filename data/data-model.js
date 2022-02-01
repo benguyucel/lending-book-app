@@ -63,7 +63,7 @@ async function deleteAutor(id) {
 
 
 async function getPublisher() {
-    return await db('publisher')
+    return await db('publisher').where('status',true)
 }
 
 async function addPublisher(newPublisher) {
@@ -81,7 +81,7 @@ async function updatePublisher(updatedData, id) {
 }
 
 async function deletePublisher(id) {
-    await db('publisher').where('id', id).del();
+    await db('publisher').where('id', id).update({status:false});
 }
 
 //Person
