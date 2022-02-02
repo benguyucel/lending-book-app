@@ -156,7 +156,7 @@ async function getBook() {
     return db('book as b')
         .join("author as a", 'b.author_id', 'a.id')
         .join('publisher as p', 'b.publisher_id', 'p.id')
-        .select('b.id as bookId', 'b.name as book', 'b.image_url', 'a.name as author', 'p.name as publisher', 'page_count', 'status');
+        .select('b.id as bookId', 'b.name as book', 'b.image_url', 'a.name as author', 'p.name as publisher', 'page_count', 'b.status');
 }
 async function getBookById(id) {
     const book = await db('book as b')
