@@ -17,6 +17,20 @@ router.get('/', async (req, res, next) => {
         next([400, messages.serverUpdate])
     }
 })
+router.get('/:id', async (req, res, next) => {
+    try {
+        let {
+            id
+        } = req.params;
+        const publisher = await Publisher.getPublisherById(id)
+        res.status(200).json(publisher)
+    } catch (error) {
+        console.log({
+            error
+        })
+        next([400, messages.serverUpdate])
+    }
+})
 
 router.post('/',
     body('name').notEmpty().withMessage(`Publisher ${messages.required}`),
