@@ -52,18 +52,20 @@ router.post('/',
 
         if (!errors.isEmpty()) {
             next([400, errors.array()])
+        }else{
+            try {
+                let newBook = req.body;
+                const added = await Book.addBook(newBook);
+                res.status(200).json(added)
+    
+            } catch (error) {
+                console.log({
+                    error
+                })
+                next([500, messages.serverAdd])
+            }
         }
-        try {
-            let newBook = req.body;
-            const added = await Book.addBook(newBook);
-            res.status(200).json(added)
-
-        } catch (error) {
-            console.log({
-                error
-            })
-            next([500, messages.serverAdd])
-        }
+    
     })
 
 router.put('/:id',
@@ -80,20 +82,22 @@ router.put('/:id',
     async (req, res) => {
         if (!errors.isEmpty()) {
             next([400, errors.array()])
+        }else{
+            try {
+                let {
+                    id
+                } = req.params;
+                updatedData = req.body;
+                const updated = await Book.updateBook(updatedData, id);
+                res.status(200).json(updated);
+            } catch (error) {
+                console.log({
+                    error
+                })
+                next([500, messages.serverUpdate])
+            }
         }
-        try {
-            let {
-                id
-            } = req.params;
-            updatedData = req.body;
-            const updated = await Book.updateBook(updatedData, id);
-            res.status(200).json(updated);
-        } catch (error) {
-            console.log({
-                error
-            })
-            next([500, messages.serverUpdate])
-        }
+      
 
     })
 
