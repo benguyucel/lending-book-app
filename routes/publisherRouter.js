@@ -33,17 +33,18 @@ router.post('/', body('name').notEmpty().withMessage(`Publisher ${messages.requi
         next([
             400, errors.array()
         ])
-    }
-    try {
-        let newPublisher = req.body;
-        const added = Publisher.addPublisher(newPublisher)
-        res
-            .status(200)
-            .json(added);
+    } else {
+        try {
+            let newPublisher = req.body;
+            const added = Publisher.addPublisher(newPublisher)
+            res
+                .status(200)
+                .json(added);
 
-    } catch (error) {
-        console.log({error})
-        next([400, messages.serverAdd])
+        } catch (error) {
+            console.log({error})
+            next([400, messages.serverAdd])
+        }
     }
 
 })
@@ -53,18 +54,19 @@ router.put('/:id', body('name').notEmpty().withMessage(`Publisher ${messages.req
         next([
             400, errors.array()
         ])
-    }
-    try {
+    } else {
+        try {
 
-        let {id} = req.params;
-        updatedData = req.body;
-        const updated = await Publisher.updatePublisher(updatedData, id)
-        res
-            .status(200)
-            .json(updated);
-    } catch (error) {
-        console.log({error})
-        next([500, messages.serverUpdate])
+            let {id} = req.params;
+            updatedData = req.body;
+            const updated = await Publisher.updatePublisher(updatedData, id)
+            res
+                .status(200)
+                .json(updated);
+        } catch (error) {
+            console.log({error})
+            next([500, messages.serverUpdate])
+        }
     }
 })
 
