@@ -36,6 +36,20 @@ router.get('/:id', async (req, res, next) => {
         next([404, `Book ${messages.notFound}`])
     }
 })
+router.get('/detail/:id', async (req, res, next) => {
+    try {
+        const {
+            id
+        } = req.params;
+        const book = await Book.getBookDetail(id);
+        res.status(200).json(book);
+    } catch (error) {
+        console.log({
+            error
+        });
+        next([404, `Book ${messages.notFound}`])
+    }
+})
 router.post('/',
     body('name').notEmpty().withMessage(`Bookname ${messages.required}`),
     body('name').isLength({

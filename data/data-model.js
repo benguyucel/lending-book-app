@@ -26,7 +26,8 @@ module.exports = {
     addLending,
     updateLending,
     getLendingById,
-    deleteLending
+    deleteLending,
+    getBookDetail
 }
 
 async function getAutor() {
@@ -159,6 +160,16 @@ async function getBook() {
         .select('b.id as bookId', 'b.name as book', 'b.image_url', 'a.name as author', 'p.name as publisher', 'page_count', 'b.status');
 }
 async function getBookById(id) {
+    const book = await db('book')
+        .where('id', id)
+        .first();
+    if (book) {
+        return book
+    } else {
+        throw new Error();
+    }
+}
+async function getBookDetail(id) {
     const book = await db('book as b')
         .join("author as a", 'b.author_id', 'a.id')
         .join('publisher as p', 'b.publisher_id', 'p.id')
