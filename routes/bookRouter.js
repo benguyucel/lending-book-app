@@ -93,6 +93,7 @@ router.put('/:id',
         max: 4
     }).withMessage(messages.maxPageCount),
     async (req, res,next) => {
+        const errors = validationResult(req);
         if (!errors.isEmpty()) {
             next([400, errors.array()])
         }else{
