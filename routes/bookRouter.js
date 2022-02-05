@@ -57,7 +57,6 @@ router.post('/',
                 let newBook = req.body;
                 const added = await Book.addBook(newBook);
                 res.status(200).json(added)
-    
             } catch (error) {
                 console.log({
                     error
@@ -79,7 +78,7 @@ router.put('/:id',
     body('page_count').isLength({
         max: 4
     }).withMessage(messages.maxPageCount),
-    async (req, res) => {
+    async (req, res,next) => {
         if (!errors.isEmpty()) {
             next([400, errors.array()])
         }else{

@@ -43,7 +43,6 @@ router.post('/', body('name').notEmpty().withMessage(`Author ${messages.required
                 .json(added)
 
         } catch (error) {
-            console.log({error})
             next([500, messages.serverAdd])
         }
     }

@@ -159,10 +159,11 @@ async function getBook() {
         .select('b.id as bookId', 'b.name as book', 'b.image_url', 'a.name as author', 'p.name as publisher', 'page_count', 'b.status');
 }
 async function getBookById(id) {
+    console.log(id)
     const book = await db('book as b')
         .join("author as a", 'b.author_id', 'a.id')
         .join('publisher as p', 'b.publisher_id', 'p.id')
-        .select('b.id as bookId', 'b.name as book', 'a.name as author', 'p.name as publisher', 'b.image_url', 'page_count', 'status')
+        .select('b.id as bookId', 'b.name as book', 'a.name as author', 'p.name as publisher', 'b.image_url', 'page_count', 'b.status')
         .where('b.id', id)
         .first();
     if (book) {
