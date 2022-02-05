@@ -14,14 +14,14 @@ exports.up = function (knex) {
       //publisher
       table.increments();
       table.string("name", 50)
-      table.text("image_url").defaultTo(null)
+      table.text("image_url").defaultTo("")
       table.boolean('status').defaultTo(true);
 
     }).createTable('author', (table) => {
       //author
       table.increments('id');
       table.string('name', 100)
-      table.text("image_url").defaultTo(null)
+      table.text("image_url").defaultTo("")
       table.boolean('status').defaultTo(true);
     })
     .createTable('book', (table) => {
@@ -32,7 +32,7 @@ exports.up = function (knex) {
       table.foreign('author_id').references('author.id')
       table.integer('publisher_id').unsigned();
       table.foreign('publisher_id').references('publisher.id')
-      table.text("image_url").defaultTo(null)
+      table.text("image_url").defaultTo("")
       table.string('page_count', 4).notNullable();
       table.boolean('status').defaultTo(true);
 
