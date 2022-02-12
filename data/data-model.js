@@ -14,6 +14,7 @@ module.exports = {
     deletePublisher,
     getPerson,
     getPersonById,
+    getPersonDetail,
     getBookById,
     addPerson,
     updatePerson,
@@ -112,7 +113,14 @@ async function getPerson() {
     return await db('person')
 }
 async function getPersonById(id) {
+    const person = await db('person')
+        .where('id', id)
+        .first();
+    return person;
 
+}
+
+async function getPersonDetail() {
     const person = await db('person as p')
         .leftJoin('lending as l', 'p.id', 'l.person_id')
         .leftJoin('book as b', 'l.book_id', 'b.id')

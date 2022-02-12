@@ -23,6 +23,17 @@ router.get('/:id', async(req, res, next) => {
         const person = await Person.getPersonById(id)
         res
             .status(200)
+            .json(person)
+    } catch (error) {
+        next([404, `Person ${messages.notFound}`])
+    }
+})
+router.get('/detail/:id', async(req, res, next) => {
+    try {
+        let {id} = req.params;
+        const person = await Person.getPersonById(id)
+        res
+            .status(200)
             .json(personMapper(person))
     } catch (error) {
         console.log({error});
