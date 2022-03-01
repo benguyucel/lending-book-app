@@ -38,7 +38,7 @@ router.post('/', async (req, res, next) => {
                 next([400, messages.updatedData])
             }
         } else {
-            next([400, `${book} ${messages.bookLendingSomeOneElse}`])
+            next([400, messages.bookLendingSomeOneElse])
         }
     } catch (error) {
         console.log({
