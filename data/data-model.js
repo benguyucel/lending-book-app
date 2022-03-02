@@ -238,7 +238,7 @@ async function getLending() {
         .join('publisher as pu', 'b.publisher_id', 'pu.id')
         .select('l.id', 'b.id as bookId', 'b.image_url', 'b.name as bookName', 'p.name as personName', 'p.sur_name as surName', 'pu.name as publisherName',
         'l.created_at as createt_at',
-        'l.deliver__date deliver_at'
+        'l.deliver__date as deliver_at'
         )
 }
 
