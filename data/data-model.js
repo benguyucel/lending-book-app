@@ -47,10 +47,15 @@ async function getAuthorById(id) {
 }
 
 async function addAutor(newAuthor) {
-    const [id] = await db('author').insert(newAuthor, "id")
-    return db('author')
-        .where(id)
-        .first();
+  
+    const [
+        {
+            id
+        }
+    ] = 
+   await db('author').insert(newAuthor,"id")
+   return db('author').where({'id':id}).first();
+   
 }
 
 async function updateAuthor(updatedData, id) {
@@ -231,7 +236,10 @@ async function getLending() {
         .join('book as b', 'l.book_id', 'b.id')
         .join('person as p', 'l.person_id', 'p.id')
         .join('publisher as pu', 'b.publisher_id', 'pu.id')
-        .select('l.id', 'b.id as bookId', 'b.image_url', 'b.name as bookName', 'p.name as personName', 'p.sur_name as surName', 'pu.name as publisherName')
+        .select('l.id', 'b.id as bookId', 'b.image_url', 'b.name as bookName', 'p.name as personName', 'p.sur_name as surName', 'pu.name as publisherName',
+        'l.created_at as createt_at',
+        'l.deliver__date deliver_at'
+        )
 }
 
 async function addLending(newLending) {
