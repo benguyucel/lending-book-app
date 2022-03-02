@@ -47,7 +47,7 @@ exports.up = function (knex) {
         precision: 6
       }).defaultTo(knex.fn.now(6));
       table.timestamp('updated_at').defaultTo(knex.fn.now());
-      table.string('deliver__date').defaultTo(null);
+      table.string('deliver__date',100).defaultTo(null);
       
     })
 };
