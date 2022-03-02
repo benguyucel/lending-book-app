@@ -42,10 +42,9 @@ exports.up = function (knex) {
       table.foreign('book_id').references("book.id");
       table.integer('person_id').unsigned();
       table.foreign('person_id').references("person.id");
-      table.timestamp('created_at', {
-        useTz: false,
-        precision: 6
-      }).defaultTo(knex.fn.now(6));
+      table.string('created_at', {
+       
+      }).defaultTo(null);
       table.timestamp('updated_at').defaultTo(knex.fn.now());
       table.string('deliver__date',100).defaultTo(null);
       
