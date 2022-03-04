@@ -97,10 +97,11 @@ router.delete('/:id', async (req, res, next) => {
     } = req.params
     try {
         const findLending = await Lending.getLendingById(id);
+        console.log(findLending);
         if (findLending) {
             const bookUpdate = await Lending.updateBook({
                 status: true
-            }, findLending.book_id);
+            }, findLending.bookId);
             if (bookUpdate) {
                 await Lending.deleteLending(id)
                 res.status(200).end();

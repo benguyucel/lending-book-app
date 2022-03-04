@@ -263,7 +263,7 @@ async function getLendingById(id) {
         .join('book as b', 'l.book_id', 'b.id')
         .join('person as p', 'l.person_id', 'p.id')
         .join('publisher as pu', 'b.publisher_id', 'pu.id')
-        .select('l.id', 'b.name as bookName', 'p.name as personName', 'b.image_url', 'p.sur_name as surName', 'pu.name as publisherName', 'l.created_at as created_at')
+        .select('l.id', 'b.name as bookName', 'b.id as bookId', 'p.name as personName', 'b.image_url', 'p.sur_name as surName', 'pu.name as publisherName', 'l.created_at as created_at')
         .where('l.id', id)
         .first();
     if (lend) {
